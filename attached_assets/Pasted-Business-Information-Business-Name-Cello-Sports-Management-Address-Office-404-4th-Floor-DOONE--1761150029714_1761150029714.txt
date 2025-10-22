@@ -1,0 +1,182 @@
+Business Information
+Business Name: Cello Sports Management
+Address: Office 404, 4th Floor, DOONE HOUSE, Anton Lembede St, Durban Central, Durban, 4031
+Phone: 071 872 6236
+Telephone: 031 880 3122
+Email:
+
+info@cellosports.co.za
+
+hr@cellosports.co.za
+
+siphelele@cellosports.co.za
+
+seymour@cellosports.co.za
+
+admin@cellosports.co.za
+Instagram: https://www.instagram.com/cellosportsmanagement/
+Domain: www.cellosports.co.za
+
+Project Goal
+Build a clean, responsive, and visually appealing website that reflects the energy and professionalism of Cello Sports Management.
+The website should inspire confidence in athletes, partners, and sponsors while providing clear information about services, programs, and contact options.
+
+Core Requirements
+1. Website Type
+A corporate + portfolio-style website for a sports management agency.
+It should highlight athlete representation, training programs, events, and sponsorship opportunities.
+
+2. Branding & Design
+Use a modern, athletic-inspired design — strong typography, bold imagery, and energetic color tones (e.g., black, white, silver, and electric blue/green).
+
+Include subtle micro animations (scroll reveals, hover effects, and fade transitions).
+
+Ensure consistent branding with rounded corners, soft shadows, and clean layout grids.
+
+The tone should balance professionalism and youthful energy.
+
+Use sports-related photography and motion visuals (athletes in action, teamwork, stadium shots).
+
+3. Website Structure & Sections
+Hero Section
+Full-width hero banner with a bold headline:
+“Empowering Athletes. Building Futures.”
+
+Subtext: “Professional sports management, representation, and performance development.”
+
+Include a dynamic sports video or background image.
+
+Prominent Call-to-Action (CTA): “Get In Touch” or “Represent Me”.
+
+About Us
+Overview of Cello Sports Management — who they are, their mission, and what sets them apart.
+
+Mention leadership team (Siphelele and Seymour) and their expertise in athlete management and sports coordination.
+
+Include high-quality team photos and short bios.
+
+Services
+Showcase main service areas with icons or cards:
+
+Athlete Representation
+
+Sports Marketing & Sponsorships
+
+Event Management
+
+Talent Scouting & Recruitment
+
+Training & Development Programs
+Each card should include a short description and a “Learn More” link.
+
+Athletes / Portfolio
+Display featured athletes under management with profile cards (image, name, sport, team, short description).
+
+Include a lightbox gallery for highlight reels or images.
+
+Option to filter by sport category.
+
+Events & Highlights
+Showcase recent or upcoming events managed or sponsored by Cello Sports.
+
+Include event posters, photo galleries, and recap videos.
+
+Option for visitors to register or inquire about partnerships.
+
+Testimonials
+Include quotes from athletes, partners, and organizations.
+
+Optionally use a carousel layout for client feedback.
+
+Gallery
+A visual showcase of events, athletes, and activities.
+
+Enable lightbox or modal previews with smooth transitions.
+
+Contact Section
+Contact form with fields: Name, Email, Phone, Message.
+
+Include a Google Map embed for office location.
+
+Contact details listed clearly:
+
+071 872 6236 / 031 880 3122
+
+info@cellosports.co.za
+
+Office 404, 4th Floor, DOONE HOUSE, Anton Lembede St, Durban Central, Durban, 4031
+
+Footer
+Quick links: Home, About, Services, Athletes, Events, Contact
+
+Social media: Instagram icon linked to the profile
+
+Copyright notice:
+“© 2025 Cello Sports Management. All Rights Reserved.”
+
+4. SEO Optimization
+Target keywords:
+
+Sports Management Durban
+
+Athlete Representation South Africa
+
+Sports Agency KwaZulu-Natal
+
+Athlete Development and Sponsorship
+
+Sports Event Management Durban
+
+Use optimized meta titles, meta descriptions, and image alt tags.
+
+Include Schema.org Local Business markup.
+
+Add Open Graph tags for sharing previews.
+
+5. Performance & Responsiveness
+Mobile-first design with fast load speeds.
+
+Lazy load images and videos.
+
+Ensure cross-browser compatibility (Chrome, Safari, Edge, Firefox).
+
+6. Content & Tone
+Professional, motivational, and trustworthy tone.
+
+Use short, powerful copy that appeals to athletes, coaches, and sponsors.
+
+Incorporate clear CTAs throughout (“Join Us”, “Get Representation”, “Partner With Us”).
+
+7. Optional Advanced Features
+Blog Section for sports insights, event recaps, and athlete features.
+
+Career Page for open positions (linked to hr@cellosports.co.za).
+
+Contact Form Notifications sent to info@cellosports.co.za and admin@cellosports.co.za.
+
+Optional WhatsApp chat button for direct contact.
+
+8. Technical Stack Suggestions
+Frontend: Next.js or React
+
+Styling: Tailwind CSS
+
+Animations: Framer Motion
+
+Lucide For Icons
+
+Include import { useRouter } from "next/navigation"; in navigation components.
+
+9. SEO & Marketing Enhancements
+Generate sitemap.xml and robots.txt.
+
+Integrate Google Analytics and Meta Pixel.
+
+Suggest launch marketing through Instagram and local press.
+
+10. Suggested Headline Copy
+“Empowering Athletes. Building Futures.”
+
+“Your Trusted Partner in Sports Management.”
+
+“From Representation to Recognition — We Manage Champions.”
