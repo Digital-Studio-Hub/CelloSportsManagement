@@ -95,6 +95,16 @@ export function Footer() {
                   </button>
                 </Link>
               </li>
+              <li>
+                <Link href="/careers">
+                  <button
+                    className="text-background/70 hover:text-background transition-colors text-sm"
+                    data-testid="footer-link-careers"
+                  >
+                    Careers
+                  </button>
+                </Link>
+              </li>
             </ul>
           </div>
 
