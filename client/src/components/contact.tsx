@@ -18,6 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { insertContactSchema, type InsertContact } from "@shared/schema";
 import { MapPin, Phone, Mail } from "lucide-react";
+import analytics from "@/lib/analytics";
 
 export function Contact() {
   const { toast } = useToast();
@@ -40,6 +41,10 @@ export function Contact() {
     onSuccess: () => {
       setIsSubmitted(true);
       form.reset();
+      
+      // Track contact form submission (NO PII sent to analytics)
+      analytics.trackContactFormSubmit();
+      
       toast({
         title: "Message Sent!",
         description:

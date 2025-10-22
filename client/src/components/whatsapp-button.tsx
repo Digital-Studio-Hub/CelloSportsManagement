@@ -1,9 +1,14 @@
 import { MessageCircle } from "lucide-react";
+import analytics from "@/lib/analytics";
 
 export function WhatsAppButton() {
   const phoneNumber = "27836219880"; // Cello Sports Management WhatsApp number
   const message = encodeURIComponent("Hi! I'm interested in learning more about Cello Sports Management services.");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+  const handleClick = () => {
+    analytics.trackWhatsAppClick();
+  };
 
   return (
     <div className="fixed bottom-6 right-6 z-50 group">
@@ -11,6 +16,7 @@ export function WhatsAppButton() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleClick}
         className="relative flex items-center justify-center h-14 w-14 rounded-full bg-[#25D366] text-white shadow-lg hover-elevate active-elevate-2 transition-all duration-300"
         data-testid="button-whatsapp"
       >
