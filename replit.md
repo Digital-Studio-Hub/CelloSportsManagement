@@ -4,7 +4,22 @@
 
 Cello Sports Management is a corporate portfolio website for a professional sports management agency based in Durban, South Africa. The application serves as a digital presence to showcase athlete representation, training programs, events, and sponsorship opportunities. The website combines athletic energy with corporate professionalism, featuring a modern design inspired by premium sports brands like Nike and Adidas.
 
-The platform is built as a single-page application with smooth scrolling navigation between sections including hero, about, services, athletes, events, testimonials, gallery, and contact. It includes a contact form submission system for lead generation and client inquiries.
+The platform includes:
+- **Home Page**: Single-page application with smooth scrolling navigation (hero, about, services, athletes, events, testimonials, gallery, contact)
+- **Blog Section**: Article listings with rich content, categories, and detail views
+- **Careers Page**: Job listings with detailed descriptions and email application system
+- **Contact Form**: Lead generation with automated email notifications to management team
+- **Analytics**: Google Analytics 4 and Meta Pixel tracking for marketing insights
+- **WhatsApp Integration**: Floating chat button for instant direct communication
+
+## Recent Changes (October 2025)
+
+### Next-Phase Features Completed:
+1. **WhatsApp Chat Integration** - Floating button in bottom-right corner opens chat with Cello Sports Management (+27718726236)
+2. **Google Analytics 4 & Meta Pixel** - Privacy-compliant tracking for form submissions, WhatsApp clicks, and conversion events
+3. **Blog Section** - Full blog with listing page, detail pages, categories (Insights, Event Recaps, Athlete Stories), and 3 seeded sample posts
+4. **Careers Page** - 4 job postings (Sports Agent, Marketing Coordinator, Event Manager, Talent Scout) with email application system
+5. **Email Notifications** - Automated Resend integration sends contact form submissions to info@, hr@, and admin@cellosports.co.za with HTML template
 
 ## User Preferences
 
@@ -16,7 +31,7 @@ Preferred communication style: Simple, everyday language.
 
 **Framework**: React 18+ with TypeScript, using Vite as the build tool and development server.
 
-**Routing**: Wouter for lightweight client-side routing. The application is primarily a single-page application with a home page and a 404 not-found page.
+**Routing**: Wouter for lightweight client-side routing. The application includes a home page (single-page layout with smooth scrolling), blog listing page, blog post detail pages, careers page, and 404 not-found page.
 
 **State Management**: TanStack React Query (v5) for server state management, form handling through React Hook Form with Zod validation.
 
@@ -44,7 +59,10 @@ Preferred communication style: Simple, everyday language.
 
 **ORM**: Drizzle ORM for type-safe database queries and schema management. Schema definitions use drizzle-zod for automatic Zod schema generation from database schemas.
 
-**Schema**: Currently implements a contacts table for form submissions with fields for id, name, email, phone, message, and createdAt timestamp. Additional entities (Athlete, Event, GalleryItem, Testimonial) are defined as TypeScript interfaces but not yet backed by database tables.
+**Schema**: 
+- `contacts` table: Form submissions (id, name, email, phone, message, createdAt)
+- `blogPosts` table: Blog articles (id, title, slug, excerpt, content, author, category, image, published)
+- Additional entities (Athlete, Event, GalleryItem, Testimonial) are defined as TypeScript interfaces but not yet backed by database tables
 
 **Storage Strategy**: Dual storage implementation with a MemStorage in-memory store (for development/testing) and infrastructure for PostgreSQL persistence. The storage interface is abstracted to allow easy switching between implementations.
 
@@ -126,6 +144,14 @@ Preferred communication style: Simple, everyday language.
 ### Utilities
 - **date-fns**: Date utility library
 - **nanoid**: Unique ID generation
+
+### Email Service
+- **resend**: Modern transactional email service for contact form notifications
+  - 3,000 free emails per month
+  - Sends automated notifications to info@, hr@, and admin@cellosports.co.za
+  - HTML email templates with branding
+  - Security: HTML injection protection via escapeHtml function
+  - Configuration via RESEND_API_KEY environment variable
 
 ### Google Fonts
 - **Inter**: Body text font (weights 300-800)
