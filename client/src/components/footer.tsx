@@ -1,13 +1,30 @@
 import { SiInstagram } from "react-icons/si";
+import { Link, useLocation } from "wouter";
 
 export function Footer() {
+  const [, navigate] = useLocation();
+  
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+    // If not on home page, go home first
+    if (window.location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      }
     }
   };
 
@@ -67,6 +84,16 @@ export function Footer() {
                 >
                   Events
                 </button>
+              </li>
+              <li>
+                <Link href="/blog">
+                  <button
+                    className="text-background/70 hover:text-background transition-colors text-sm"
+                    data-testid="footer-link-blog"
+                  >
+                    Blog
+                  </button>
+                </Link>
               </li>
             </ul>
           </div>

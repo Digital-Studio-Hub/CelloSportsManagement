@@ -73,3 +73,34 @@ export interface GalleryItem {
   caption: string;
   category: string;
 }
+
+// Blog Posts
+export const blogPosts = pgTable("blog_posts", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  slug: text("slug").notNull().unique(),
+  excerpt: text("excerpt").notNull(),
+  content: text("content").notNull(),
+  author: text("author").notNull(),
+  category: text("category").notNull(),
+  image: text("image").notNull(),
+  published: timestamp("published").defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
+  id: true,
+  createdAt: true,
+  published: true,
+}).extend({
+  title: z.string().min(5, "Title must be at least 5 characters"),
+  slug: z.string().min(3, "Slug must be at least 3 characters"),
+  excerpt: z.string().min(20, "Excerpt must be at least 20 characters"),
+  content: z.string().min(100, "Content must be at least 100 characters"),
+  author: z.string().min(2, "Author must be at least 2 characters"),
+  category: z.string().min(2, "Category must be at least 2 characters"),
+  image: z.string().url("Image must be a valid URL"),
+});
+
+export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+export type BlogPost = typeof blogPosts.$inferSelect;

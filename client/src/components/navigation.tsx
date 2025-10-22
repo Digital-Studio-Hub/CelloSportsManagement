@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { SiInstagram } from "react-icons/si";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useLocation } from "wouter";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,13 +29,28 @@ export function Navigation() {
     }
   };
 
+  const handleNavigation = (link: { id?: string; path?: string }) => {
+    if (link.path) {
+      navigate(link.path);
+      setIsMobileMenuOpen(false);
+    } else if (link.id) {
+      // If we're not on home page, go home first
+      if (window.location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => scrollToSection(link.id!), 100);
+      } else {
+        scrollToSection(link.id);
+      }
+    }
+  };
+
   const navLinks = [
     { label: "Home", id: "hero" },
     { label: "About", id: "about" },
     { label: "Services", id: "services" },
     { label: "Athletes", id: "athletes" },
     { label: "Events", id: "events" },
-    { label: "Gallery", id: "gallery" },
+    { label: "Blog", path: "/blog" },
     { label: "Contact", id: "contact" },
   ];
 
@@ -65,8 +82,8 @@ export function Navigation() {
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
+                key={link.id || link.path}
+                onClick={() => handleNavigation(link)}
                 className="px-4 py-2 text-sm font-medium text-foreground/80 hover-elevate active-elevate-2 rounded-md transition-colors"
                 data-testid={`link-${link.label.toLowerCase()}`}
               >
@@ -120,8 +137,8 @@ export function Navigation() {
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
+                  key={link.id || link.path}
+                  onClick={() => handleNavigation(link)}
                   className="px-4 py-3 text-left text-sm font-medium hover-elevate active-elevate-2 rounded-md"
                   data-testid={`mobile-link-${link.label.toLowerCase()}`}
                 >
