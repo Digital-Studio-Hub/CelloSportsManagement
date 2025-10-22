@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema, insertBlogPostSchema } from "@shared/schema";
+import { sendContactFormNotification } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission endpoint
@@ -12,6 +13,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Store contact submission
       const contact = await storage.createContact(validatedData);
+
+      // Send email notification (non-blocking - don't wait for it)
+      sendContactFormNotification(contact).catch((error) => {
+        console.error("Email notification failed (non-critical):", error);
+      });
 
       res.status(201).json({
         message: "Contact form submitted successfully",
