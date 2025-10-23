@@ -1,5 +1,7 @@
 import { SiInstagram } from "react-icons/si";
 import { Link, useLocation } from "wouter";
+import celloLogo from "@assets/CSM Logo_1761224933010.png";
+import lekkerBadge from "@assets/Level 1_1761224942353.png";
 
 export function Footer() {
   const [, navigate] = useLocation();
@@ -33,12 +35,15 @@ export function Footer() {
   return (
     <footer className="bg-foreground text-background py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           {/* Brand Column */}
           <div>
-            <div className="font-display text-2xl font-bold bg-gradient-to-r from-primary via-primary to-success bg-clip-text text-transparent mb-4">
-              CELLO
-            </div>
+            <img 
+              src={celloLogo} 
+              alt="Cello Sports Management" 
+              className="h-16 w-auto mb-4"
+              data-testid="footer-logo"
+            />
             <p className="text-background/70 text-sm leading-relaxed">
               Empowering athletes and building futures through professional
               sports management and representation.
@@ -150,6 +155,27 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+          </div>
+
+          {/* Verified Badge */}
+          <div>
+            <h3 className="font-semibold text-background mb-4">Verified Badge</h3>
+            <a
+              href="https://lekker.network/the-lekker-network-verified"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block hover:opacity-80 transition-opacity"
+              data-testid="footer-lekker-badge"
+            >
+              <img 
+                src={lekkerBadge} 
+                alt="Lekker Network Verified Level 1" 
+                className="w-32 h-auto mb-2"
+              />
+              <p className="text-background/70 text-xs text-center">
+                Lekker Network Verified
+              </p>
+            </a>
           </div>
         </div>
 

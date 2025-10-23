@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { SiInstagram } from "react-icons/si";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useLocation } from "wouter";
+import celloLogo from "@assets/CSM Logo_1761224933010.png";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -68,15 +69,14 @@ export function Navigation() {
           {/* Logo */}
           <button
             onClick={() => scrollToSection("hero")}
-            className="flex items-center gap-2 hover-elevate active-elevate-2 rounded-md px-3 py-2 -ml-3"
+            className="flex items-center hover-elevate active-elevate-2 rounded-md px-3 py-2 -ml-3"
             data-testid="link-home"
           >
-            <div className="font-display text-2xl font-bold bg-gradient-to-r from-primary via-primary to-success bg-clip-text text-transparent">
-              CELLO
-            </div>
-            <div className="hidden sm:block text-sm text-muted-foreground font-medium">
-              Sports Management
-            </div>
+            <img 
+              src={celloLogo} 
+              alt="Cello Sports Management" 
+              className="h-12 w-auto"
+            />
           </button>
 
           {/* Desktop Navigation */}
