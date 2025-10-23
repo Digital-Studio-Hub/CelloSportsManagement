@@ -72,10 +72,10 @@ export function Navigation() {
             className="flex items-center hover-elevate active-elevate-2 rounded-md px-3 py-2 -ml-3"
             data-testid="link-home"
           >
-            <img 
-              src={celloLogo} 
-              alt="Cello Sports Management" 
-              className="h-12 w-auto"
+            <img
+              src={celloLogo}
+              alt="Cello Sports Management"
+              className="h-16 w-auto"
             />
           </button>
 
