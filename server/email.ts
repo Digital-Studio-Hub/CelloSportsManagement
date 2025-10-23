@@ -1,9 +1,13 @@
-import { Resend } from "resend";
+import { SendMailClient } from "zeptomail";
 import type { Contact } from "@shared/schema";
 
-// Initialize Resend only if API key is available
-const resend = process.env.RESEND_API_KEY 
-  ? new Resend(process.env.RESEND_API_KEY)
+// Initialize ZeptoMail only if API token is available
+const ZEPTOMAIL_URL = "api.zeptomail.com/";
+const zeptoMailClient = process.env.ZEPTOMAIL_TOKEN 
+  ? new SendMailClient({
+      url: ZEPTOMAIL_URL,
+      token: process.env.ZEPTOMAIL_TOKEN
+    })
   : null;
 
 // Escape HTML to prevent injection attacks
@@ -19,6 +23,7 @@ function escapeHtml(unsafe: string): string {
 export interface EmailNotificationConfig {
   recipients: string[];
   fromEmail: string;
+  fromName: string;
   replyToEmail?: string;
 }
 
@@ -29,7 +34,8 @@ const defaultConfig: EmailNotificationConfig = {
     "hr@cellosports.co.za",
     "admin@cellosports.co.za",
   ],
-  fromEmail: "notifications@cellosports.co.za",
+  fromEmail: "noreply@cellosports.co.za",
+  fromName: "Cello Sports Management",
 };
 
 export async function sendContactFormNotification(
@@ -37,10 +43,10 @@ export async function sendContactFormNotification(
   config: EmailNotificationConfig = defaultConfig
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    // Check if API key is configured
-    if (!resend || !process.env.RESEND_API_KEY) {
+    // Check if API token is configured
+    if (!zeptoMailClient || !process.env.ZEPTOMAIL_TOKEN) {
       console.warn(
-        "RESEND_API_KEY not configured - email notification skipped"
+        "ZEPTOMAIL_TOKEN not configured - email notification skipped"
       );
       return {
         success: false,
@@ -176,22 +182,39 @@ export async function sendContactFormNotification(
       </html>
     `;
 
-    // Send email to all configured recipients
-    await resend.emails.send({
-      from: config.fromEmail,
-      to: config.recipients,
-      replyTo: contact.email, // Set reply-to to the contact's email
+    // Format recipients for ZeptoMail API
+    const toAddresses = config.recipients.map(email => ({
+      email_address: {
+        address: email,
+        name: "Cello Sports Management"
+      }
+    }));
+
+    // Send email using ZeptoMail
+    await zeptoMailClient.sendMail({
+      from: {
+        address: config.fromEmail,
+        name: config.fromName
+      },
+      to: toAddresses,
+      reply_to: config.replyToEmail ? [{
+        address: config.replyToEmail,
+        name: contact.name
+      }] : [{
+        address: contact.email,
+        name: contact.name
+      }],
       subject: `New Contact Form: ${contact.name}`,
-      html: emailHtml,
+      htmlbody: emailHtml,
     });
 
     console.log(
-      `✓ Email notification sent successfully for contact from ${contact.name}`
+      `✓ Email notification sent successfully via ZeptoMail for contact from ${contact.name}`
     );
 
     return { success: true };
   } catch (error: any) {
-    console.error("Failed to send email notification:", error);
+    console.error("Failed to send email notification via ZeptoMail:", error);
     return {
       success: false,
       error: error.message || "Unknown email error",
@@ -202,14 +225,14 @@ export async function sendContactFormNotification(
 // Test function to verify email configuration
 export async function testEmailConfiguration(): Promise<boolean> {
   try {
-    if (!process.env.RESEND_API_KEY) {
-      console.error("❌ RESEND_API_KEY environment variable not set");
+    if (!process.env.ZEPTOMAIL_TOKEN) {
+      console.error("❌ ZEPTOMAIL_TOKEN environment variable not set");
       return false;
     }
 
-    console.log("✓ Resend API key found");
+    console.log("✓ ZeptoMail API token found");
     console.log(`✓ Email notifications will be sent to: ${defaultConfig.recipients.join(", ")}`);
-    console.log(`✓ Emails will be sent from: ${defaultConfig.fromEmail}`);
+    console.log(`✓ Emails will be sent from: ${defaultConfig.fromEmail} (${defaultConfig.fromName})`);
     
     return true;
   } catch (error) {

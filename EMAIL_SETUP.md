@@ -1,256 +1,183 @@
-# Email Notifications Setup Guide
+# Email Setup Guide - ZeptoMail
+
+This guide explains how to configure ZeptoMail for automated email notifications from the Cello Sports Management contact form.
 
 ## Overview
 
-Cello Sports Management uses **Resend** for automated email notifications when users submit the contact form. This provides instant notifications to the management team for rapid response to inquiries.
+The website uses ZeptoMail (by Zoho) to send automated email notifications when users submit the contact form. Email notifications are sent to:
+- info@cellosports.co.za
+- hr@cellosports.co.za
+- admin@cellosports.co.za
 
-## Email Service: Resend
+## Quick Start
 
-**Why Resend?**
-- Modern, developer-friendly API
-- 3,000 free emails per month (forever)
-- Excellent deliverability rates
-- Simple setup with TypeScript support
-- No credit card required for free tier
+### 1. Get Your ZeptoMail API Token
 
-## Configuration
+1. Sign up for a free ZeptoMail account at [zeptomail.zoho.com](https://www.zeptomail.com)
+2. Navigate to **Settings** → **API Keys**
+3. Create a new API key and copy the token (starts with "Zoho-enczapikey")
+4. Store it securely - you won't be able to see it again
 
-### 1. Get Your Resend API Key
+### 2. Configure Environment Variable
 
-1. Visit [resend.com](https://resend.com) and create a free account
-2. Navigate to **API Keys** in the dashboard
-3. Click "Create API Key"
-4. Give it a name (e.g., "Cello Sports Production")
-5. Copy the API key (it starts with `re_`)
+Add your ZeptoMail API token to Replit Secrets:
 
-### 2. Add API Key to Replit Secrets
-
-1. In your Replit project, click the **Secrets** icon (🔒) in the left sidebar
+1. Click the **Secrets** tab in Replit (lock icon in left sidebar)
 2. Add a new secret:
-   - **Key**: `RESEND_API_KEY`
-   - **Value**: Your Resend API key (e.g., `re_xxxxxxxxxxxx`)
-3. Click "Add Secret"
+   - **Key**: `ZEPTOMAIL_TOKEN`
+   - **Value**: Your ZeptoMail API token (e.g., `Zoho-enczapikey wSsVR...`)
+3. Save the secret
 
-The application will automatically detect the API key and enable email notifications.
+### 3. Verify Domain (Recommended)
 
-### 3. Configure Your Domain (Optional but Recommended)
+For better email deliverability:
 
-For better deliverability and professional branding:
+1. In ZeptoMail dashboard, go to **Settings** → **Email Domains**
+2. Add `cellosports.co.za` as a verified domain
+3. Follow the DNS verification steps (add TXT and CNAME records)
+4. Wait for verification (usually takes a few minutes)
 
-1. In Resend dashboard, go to **Domains**
-2. Click "Add Domain" and enter: `cellosports.co.za`
-3. Add the provided DNS records to your domain:
-   - SPF record
-   - DKIM record
-   - DMARC record (optional)
-4. Wait for verification (usually takes 5-15 minutes)
+Once verified, update `fromEmail` in `server/email.ts` if needed:
+```typescript
+fromEmail: "noreply@cellosports.co.za",  // Uses your verified domain
+```
 
-Once verified, update the `fromEmail` in `server/email.ts`:
+## Testing Email Delivery
+
+After configuration, test the email system:
+
+1. Submit the contact form on your website
+2. Check the server logs for success message:
+   ```
+   ✓ Email notification sent successfully via ZeptoMail for contact from [Name]
+   ```
+3. Verify emails arrive in all three inboxes
+
+## Email Template Customization
+
+The email template is defined in `server/email.ts`. To customize:
+
+### Change Recipients
+
+Edit the `defaultConfig` in `server/email.ts`:
 ```typescript
 const defaultConfig: EmailNotificationConfig = {
   recipients: [
     "info@cellosports.co.za",
     "hr@cellosports.co.za",
-    "admin@cellosports.co.za",
+    // Add or remove email addresses as needed
   ],
-  fromEmail: "notifications@cellosports.co.za", // Use your verified domain
+  fromEmail: "noreply@cellosports.co.za",
+  fromName: "Cello Sports Management",
 };
 ```
 
-## Email Notification Features
+### Customize Email HTML
 
-### What Gets Sent
+The HTML template starts at line ~52 in `server/email.ts`. You can modify:
+- Colors and styling in the `<style>` section
+- Email content in the `<body>` section
+- Add company logo or branding
 
-When a user submits the contact form, the team receives an email with:
-
-- **Contact Name**: Full name of the person inquiring
-- **Email Address**: Clickable mailto: link for easy response
-- **Phone Number**: Clickable tel: link (if provided)
-- **Message**: Full message content in a highlighted box
-- **Timestamp**: Submission time in South African timezone (SAST)
-
-### Who Receives Emails
-
-By default, notifications are sent to:
-- `info@cellosports.co.za`
-- `hr@cellosports.co.za`
-- `admin@cellosports.co.za`
-
-### Reply-To Functionality
-
-All notification emails have `Reply-To` set to the contact's email address. This means:
-- Click "Reply" in your email client
-- It automatically addresses your response to the person who submitted the form
-- No need to copy/paste email addresses
-
-## Email Template
-
-The notification email includes:
-
-```
-Subject: New Contact Form: [Contact Name]
-
-┌─────────────────────────────────────┐
-│  🏆 New Contact Form Submission     │
-└─────────────────────────────────────┘
-
-NAME
-[Contact Name]
-
-EMAIL
-[contact@email.com]
-
-PHONE (if provided)
-[+27 XX XXX XXXX]
-
-MESSAGE
-┌─────────────────────────────────────┐
-│ [Full message content]              │
-│ [Preserves line breaks]             │
-└─────────────────────────────────────┘
-
-SUBMITTED
-[Full date and time in SAST]
-```
-
-## Customization
-
-### Change Email Recipients
-
-Edit `server/email.ts`:
-
-```typescript
-const defaultConfig: EmailNotificationConfig = {
-  recipients: [
-    "info@cellosports.co.za",
-    "custom@cellosports.co.za",  // Add more recipients here
-  ],
-  fromEmail: "notifications@cellosports.co.za",
-};
-```
-
-### Customize Email Template
-
-The HTML email template is in the `sendContactFormNotification` function in `server/email.ts`. You can modify:
-- Colors and styling
-- Layout and structure
-- Additional fields or information
-- Branding elements
-
-### Test Email Configuration
-
-To verify your email setup is working:
-
-```typescript
-import { testEmailConfiguration } from "./server/email";
-
-// In your server startup
-testEmailConfiguration().then((success) => {
-  if (success) {
-    console.log("✓ Email system ready");
-  } else {
-    console.log("⚠ Email system not configured");
-  }
-});
-```
-
-## How It Works
-
-1. **User submits contact form** → Data validated by Zod schema
-2. **Contact saved to database** → Stored for record-keeping
-3. **Email notification sent** → Asynchronous, non-blocking
-4. **User receives success message** → Even if email fails (graceful degradation)
-5. **Team receives email** → Multiple recipients notified simultaneously
-
-## Error Handling
-
-The system is designed to **never fail** the contact form submission due to email issues:
-
-- If `RESEND_API_KEY` is not set → Warning logged, form still succeeds
-- If Resend API fails → Error logged, form still succeeds
-- Email sending is **non-blocking** → Doesn't slow down form response
-
-This ensures users always get a successful submission experience, even if the email service is temporarily unavailable.
-
-## Monitoring & Logs
-
-### Check Email Sending Status
-
-In the Replit console, you'll see:
-
-**Success:**
-```
-✓ Email notification sent successfully for contact from John Doe
-```
-
-**Configuration Missing:**
-```
-⚠ RESEND_API_KEY not configured - email notification skipped
-```
-
-**Failure:**
-```
-❌ Email notification failed (non-critical): [error details]
-```
-
-### Resend Dashboard
-
-Monitor email deliverability in the Resend dashboard:
-- View sent emails
-- Check delivery status
-- See bounce/complaint rates
-- Review email logs
-
-## Pricing & Limits
-
-### Free Tier (Current)
-- **3,000 emails/month** (forever free)
-- **Perfect for:** Contact form notifications
-- **No credit card required**
-
-### Paid Plans (If Needed)
-- **$20/month**: 50,000 emails
-- **$80/month**: 100,000 emails
-- Only needed if you exceed 100 contact forms per day
+**Security Note**: All user input is sanitized via `escapeHtml()` to prevent HTML/JavaScript injection attacks. Never remove this sanitization.
 
 ## Troubleshooting
 
-### Emails Not Sending
+### Email Not Sending
 
-1. **Check API Key**:
+1. **Check Environment Variable**
    ```bash
-   # In Replit Secrets, verify RESEND_API_KEY exists
+   # In Replit shell
+   echo $ZEPTOMAIL_TOKEN
    ```
+   Should display your API token. If empty, the secret isn't configured.
 
-2. **Check Console Logs**:
-   ```bash
-   # Look for email-related errors in the workflow logs
-   ```
+2. **Check Server Logs**
+   Look for error messages in the workflow logs:
+   - "ZEPTOMAIL_TOKEN not configured" → Add the secret
+   - ZeptoMail API errors → Check your API token is valid
 
-3. **Verify Resend Account**:
-   - Log into resend.com
-   - Check if account is active
-   - Verify API key hasn't been revoked
+3. **Verify API Token**
+   - Ensure token starts with `Zoho-enczapikey`
+   - Make sure you copied the complete token
+   - Check token hasn't been revoked in ZeptoMail dashboard
 
-### Emails Going to Spam
+### Emails Go to Spam
 
-1. **Verify Your Domain** (see step 3 in Configuration)
-2. **Add SPF/DKIM records** to your DNS
-3. **Use a from address** that matches your domain
+1. **Verify Your Domain** - Unverified domains have lower deliverability
+2. **Configure SPF/DKIM** - ZeptoMail provides DNS records for authentication
+3. **Use Professional From Address** - e.g., `noreply@cellosports.co.za`
 
-### Wrong Recipients
+### Rate Limits
 
-Edit `server/email.ts` and update the `recipients` array in `defaultConfig`.
+ZeptoMail free tier includes:
+- **10,000 emails/month** for transactional emails
+- Sufficient for most contact form usage
+- Monitor usage in ZeptoMail dashboard
 
-## Security Notes
+## Security Best Practices
 
-- **API Key Storage**: Stored securely in Replit Secrets (not in code)
-- **No PII in Logs**: Contact emails are not logged, only success/failure status
-- **Rate Limiting**: Resend automatically rate-limits to prevent abuse
-- **Reply-To Protection**: Legitimate contact emails only, validated by form
+### Environment Variables
+
+✅ **DO**: Store API token in Replit Secrets  
+❌ **DON'T**: Hardcode token in source code  
+❌ **DON'T**: Commit token to version control  
+
+### HTML Injection Protection
+
+The email system includes `escapeHtml()` sanitization to prevent:
+- Cross-site scripting (XSS) attacks
+- HTML injection in emails
+- Malicious code execution
+
+**Never** remove or bypass this sanitization when customizing templates.
+
+### Reply-To Security
+
+Emails automatically set `reply_to` to the contact's email address, allowing staff to reply directly. This is safe as long as email addresses are validated (which they are via Zod schemas).
+
+## API Reference
+
+### ZeptoMail Configuration
+
+```typescript
+const zeptoMailClient = new SendMailClient({
+  url: "api.zeptomail.com/",
+  token: process.env.ZEPTOMAIL_TOKEN
+});
+```
+
+### Sending Emails
+
+```typescript
+await zeptoMailClient.sendMail({
+  from: {
+    address: "noreply@cellosports.co.za",
+    name: "Cello Sports Management"
+  },
+  to: [{
+    email_address: {
+      address: "recipient@example.com",
+      name: "Recipient Name"
+    }
+  }],
+  reply_to: [{
+    address: "contact@example.com",
+    name: "Contact Name"
+  }],
+  subject: "Email Subject",
+  htmlbody: "<html>...</html>",
+});
+```
 
 ## Support
 
-- **Resend Documentation**: [resend.com/docs](https://resend.com/docs)
-- **Resend Support**: support@resend.com
-- **Cello Sports Tech Support**: admin@cellosports.co.za
+For ZeptoMail-specific issues:
+- Documentation: [zeptomail.zoho.com/help](https://www.zeptomail.com/help)
+- API Reference: [www.npmjs.com/package/zeptomail](https://www.npmjs.com/package/zeptomail)
+- Support: ZeptoMail dashboard → Help & Support
+
+For application issues:
+- Check server logs in Replit workflow console
+- Review `server/email.ts` for configuration
+- Test with `testEmailConfiguration()` function
