@@ -1,6 +1,6 @@
 import { SiInstagram } from "react-icons/si";
 import { Link, useLocation } from "wouter";
-import celloLogo from "@assets/CSM Logo_1761224933010.png";
+import celloLogo from "@assets/CSM_Logo-removebg-preview_1761225796793.png";
 import lekkerBadge from "@assets/Level 1_1761224942353.png";
 
 export function Footer() {

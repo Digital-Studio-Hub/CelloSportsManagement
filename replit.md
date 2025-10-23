@@ -21,7 +21,7 @@ The platform includes:
 4. **Careers Page** - 4 job postings (Sports Agent, Marketing Coordinator, Event Manager, Talent Scout) with email application system
 5. **Email Notifications** - Automated ZeptoMail integration sends contact form submissions to info@, hr@, and admin@cellosports.co.za with HTML template
 6. **Lekker Network Badge** - Footer includes "Lekker Network Verified Level 1" badge linking to verification page
-7. **CSM Logo** - Professional logo replaced "CELLO" text branding in navigation and footer
+7. **CSM Logo** - Professional transparent logo (CSM_Logo-removebg-preview_1761225796793.png) replaced "CELLO" text branding in navigation and footer
 
 ## User Preferences
 

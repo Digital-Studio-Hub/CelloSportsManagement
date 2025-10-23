@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { SiInstagram } from "react-icons/si";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useLocation } from "wouter";
-import celloLogo from "@assets/CSM Logo_1761224933010.png";
+import celloLogo from "@assets/CSM_Logo-removebg-preview_1761225796793.png";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
