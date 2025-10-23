@@ -19,7 +19,9 @@ The platform includes:
 2. **Google Analytics 4 & Meta Pixel** - Privacy-compliant tracking for form submissions, WhatsApp clicks, and conversion events
 3. **Blog Section** - Full blog with listing page, detail pages, categories (Insights, Event Recaps, Athlete Stories), and 3 seeded sample posts
 4. **Careers Page** - 4 job postings (Sports Agent, Marketing Coordinator, Event Manager, Talent Scout) with email application system
-5. **Email Notifications** - Automated Resend integration sends contact form submissions to info@, hr@, and admin@cellosports.co.za with HTML template
+5. **Email Notifications** - Automated ZeptoMail integration sends contact form submissions to info@, hr@, and admin@cellosports.co.za with HTML template
+6. **Lekker Network Badge** - Footer includes "Lekker Network Verified Level 1" badge linking to verification page
+7. **CSM Logo** - Professional logo replaced "CELLO" text branding in navigation and footer
 
 ## User Preferences
 
@@ -146,12 +148,13 @@ Preferred communication style: Simple, everyday language.
 - **nanoid**: Unique ID generation
 
 ### Email Service
-- **resend**: Modern transactional email service for contact form notifications
-  - 3,000 free emails per month
+- **zeptomail**: Zoho's transactional email service for contact form notifications
+  - 10,000 free emails per month
   - Sends automated notifications to info@, hr@, and admin@cellosports.co.za
-  - HTML email templates with branding
+  - HTML email templates with branded gradient header
   - Security: HTML injection protection via escapeHtml function
-  - Configuration via RESEND_API_KEY environment variable
+  - Configuration via ZEPTOMAIL_TOKEN environment variable
+  - Reply-to automatically set to contact's email for easy staff responses
 
 ### Google Fonts
 - **Inter**: Body text font (weights 300-800)
