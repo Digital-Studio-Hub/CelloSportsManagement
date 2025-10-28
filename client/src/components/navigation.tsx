@@ -52,7 +52,7 @@ export function Navigation() {
     { label: "Athletes", id: "athletes" },
     { label: "Events", id: "events" },
     // { label: "Blog", path: "/blog" },
-    { label: "Careers", path: "/careers" },
+    // { label: "Careers", path: "/careers" },
     { label: "Contact", id: "contact" },
   ];
 
