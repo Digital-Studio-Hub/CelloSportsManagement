@@ -51,7 +51,7 @@ export function Navigation() {
     { label: "Services", id: "services" },
     { label: "Athletes", id: "athletes" },
     { label: "Events", id: "events" },
-    { label: "Blog", path: "/blog" },
+    // { label: "Blog", path: "/blog" },
     { label: "Careers", path: "/careers" },
     { label: "Contact", id: "contact" },
   ];
