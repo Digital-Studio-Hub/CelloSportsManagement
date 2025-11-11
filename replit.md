@@ -168,6 +168,10 @@ Preferred communication style: Simple, everyday language.
 - **Domain**: www.cellosports.co.za
 
 ### SEO & Analytics
+- **Google Analytics 4**: Tracking ID G-6Z8WBT8PBP configured for visitor analytics
+- **Meta Pixel**: Placeholder configured (YOUR_PIXEL_ID needs replacement)
+- **Sitemap**: XML sitemap at /sitemap.xml with three-zone architecture
+- **Robots.txt**: Search engine crawler directives configured
 - Meta tags configured for search engines and social media sharing
 - Schema.org structured data for local business markup
 - Open Graph and Twitter Card tags for social sharing
