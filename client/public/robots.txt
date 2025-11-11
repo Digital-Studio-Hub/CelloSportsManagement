@@ -1,0 +1,9 @@
+# Robots.txt for Cello Sports Management
+# https://www.cellosports.co.za
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.cellosports.co.za/sitemap.xml

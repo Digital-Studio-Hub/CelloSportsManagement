@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- 
+    CELLO SPORTS MANAGEMENT SITEMAP
+    Three-Zone Architecture: Header | Main Content | Footer
+  -->
+
+  <!-- ========================================== -->
+  <!-- ZONE 1: HEADER NAVIGATION -->
+  <!-- ========================================== -->
+  
+  <!-- Primary Navigation: Home -->
+  <url>
+    <loc>https://www.cellosports.co.za/</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <description>Cello Sports Management - Professional sports management, athlete representation, and performance development in Durban, South Africa.</description>
+  </url>
+
+  <!-- Primary Navigation: About Section -->
+  <url>
+    <loc>https://www.cellosports.co.za/#about</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <description>About Cello Sports Management - Our mission, vision, and commitment to empowering athletes.</description>
+  </url>
+
+  <!-- Primary Navigation: Services Section -->
+  <url>
+    <loc>https://www.cellosports.co.za/#services</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <description>Our Services - Athlete representation, sports marketing, event management, talent scouting, and training development.</description>
+  </url>
+
+  <!-- Primary Navigation: Athletes Portfolio -->
+  <url>
+    <loc>https://www.cellosports.co.za/#athletes</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <description>Our Athletes - Meet the champions we represent across multiple sports disciplines.</description>
+  </url>
+
+  <!-- Primary Navigation: Events Section -->
+  <url>
+    <loc>https://www.cellosports.co.za/#events</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <description>Upcoming Events - Sports showcases, training camps, and networking opportunities.</description>
+  </url>
+
+  <!-- Primary Navigation: Blog -->
+  <url>
+    <loc>https://www.cellosports.co.za/blog</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <description>Cello Sports Blog - Insights, event recaps, and athlete success stories.</description>
+  </url>
+
+  <!-- Primary Navigation: Careers -->
+  <url>
+    <loc>https://www.cellosports.co.za/careers</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <description>Career Opportunities - Join our team of sports management professionals.</description>
+  </url>
+
+  <!-- Primary Navigation: Contact Section -->
+  <url>
+    <loc>https://www.cellosports.co.za/#contact</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <description>Contact Cello Sports Management - Get in touch for athlete representation and sports management services.</description>
+  </url>
+
+  <!-- ========================================== -->
+  <!-- ZONE 2: MAIN CONTENT BODY -->
+  <!-- ========================================== -->
+
+  <!-- Hero Section -->
+  <url>
+    <loc>https://www.cellosports.co.za/#hero</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <description>Empowering Athletes, Building Futures - Elite sports management and athlete representation.</description>
+  </url>
+
+  <!-- Testimonials Section -->
+  <url>
+    <loc>https://www.cellosports.co.za/#testimonials</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <description>Client Testimonials - Success stories from athletes we represent.</description>
+  </url>
+
+  <!-- Gallery Section -->
+  <url>
+    <loc>https://www.cellosports.co.za/#gallery</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <description>Photo Gallery - Highlights from events, training sessions, and athlete achievements.</description>
+  </url>
+
+  <!-- Blog Posts: Athlete Success Stories Category -->
+  <url>
+    <loc>https://www.cellosports.co.za/blog/thabo-cele-journey-professional-football</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <description>Rising Star: Thabo Cele's Journey to Professional Football - An inspiring athlete success story.</description>
+  </url>
+
+  <!-- Blog Posts: Insights Category -->
+  <url>
+    <loc>https://www.cellosports.co.za/blog/mental-health-sports-performance</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <description>The Importance of Mental Health in Sports Performance - Expert insights on athlete wellness.</description>
+  </url>
+
+  <!-- Blog Posts: Event Recaps Category -->
+  <url>
+    <loc>https://www.cellosports.co.za/blog/durban-sports-summit-2024-recap</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <description>Durban Sports Summit 2024: Key Takeaways - Event highlights and industry insights.</description>
+  </url>
+
+  <!-- ========================================== -->
+  <!-- ZONE 3: FOOTER STRUCTURE -->
+  <!-- ========================================== -->
+
+  <!-- Footer Navigation: Quick Links (duplicate of header for SEO) -->
+  <!-- Covered above in Header Navigation section -->
+
+  <!-- Footer Navigation: Services -->
+  <!-- Service listings are covered in the Services Section above -->
+
+  <!-- Footer Navigation: Contact Information -->
+  <url>
+    <loc>https://www.cellosports.co.za/#contact</loc>
+    <lastmod>2025-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <description>Contact Information - Office 404, DOONE HOUSE, Durban Central | +27 71 872 6236 | info@cellosports.co.za</description>
+  </url>
+
+  <!-- Social Media: Instagram -->
+  <!-- External link: https://www.instagram.com/cellosportsmanagement/ -->
+
+  <!-- Verification Badge: Lekker Network -->
+  <!-- External link: https://lekker.network/the-lekker-network-verified -->
+
+</urlset>
