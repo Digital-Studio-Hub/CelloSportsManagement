@@ -5,5 +5,4 @@ npm-debug.log*
 .vscode
 .local
 dist
-attached_assets
 *.md
