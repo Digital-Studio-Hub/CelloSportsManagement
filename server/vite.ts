@@ -1,12 +1,8 @@
 import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
-import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
-import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
-
-const viteLogger = createLogger();
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -20,14 +16,47 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
-  const serverOptions = {
-    middlewareMode: true,
-    hmr: { server },
-    allowedHosts: true as const,
-  };
+  const vite = await import("vite");
+  const viteLogger = vite.createLogger();
 
-  const vite = await createViteServer({
-    ...viteConfig,
+  const viteServer = await vite.createServer({
+    plugins: [
+      (await import("@vitejs/plugin-react")).default(),
+      ...(process.env.NODE_ENV !== "production" && process.env.REPL_ID !== undefined
+        ? [
+            await import("@replit/vite-plugin-runtime-error-modal").then((m) =>
+              m.default(),
+            ),
+            await import("@replit/vite-plugin-cartographer").then((m) =>
+              m.cartographer(),
+            ),
+            await import("@replit/vite-plugin-dev-banner").then((m) =>
+              m.devBanner(),
+            ),
+          ]
+        : []),
+    ],
+    resolve: {
+      alias: {
+        "@": path.resolve(import.meta.dirname, "..", "client", "src"),
+        "@shared": path.resolve(import.meta.dirname, "..", "shared"),
+        "@assets": path.resolve(import.meta.dirname, "..", "attached_assets"),
+      },
+    },
+    root: path.resolve(import.meta.dirname, "..", "client"),
+    build: {
+      outDir: path.resolve(import.meta.dirname, "..", "dist", "public"),
+      emptyOutDir: true,
+    },
+    server: {
+      middlewareMode: true,
+      hmr: { server },
+      allowedHosts: true,
+      fs: {
+        strict: true,
+        deny: ["**/.*"],
+      },
+    },
     configFile: false,
     customLogger: {
       ...viteLogger,
@@ -36,11 +65,10 @@ export async function setupVite(app: Express, server: Server) {
         process.exit(1);
       },
     },
-    server: serverOptions,
     appType: "custom",
   });
 
-  app.use(vite.middlewares);
+  app.use(viteServer.middlewares);
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
@@ -58,10 +86,10 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
-      const page = await vite.transformIndexHtml(url, template);
+      const page = await viteServer.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
-      vite.ssrFixStacktrace(e as Error);
+      viteServer.ssrFixStacktrace(e as Error);
       next(e);
     }
   });

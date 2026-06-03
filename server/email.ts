@@ -1,14 +1,13 @@
-import { SendMailClient } from "zeptomail";
+import { Inbound } from "inboundemail";
 import type { Contact } from "@shared/schema";
 
-// Initialize ZeptoMail only if API token is available
-const ZEPTOMAIL_URL = "api.zeptomail.com/";
-const zeptoMailClient = process.env.ZEPTOMAIL_TOKEN 
-  ? new SendMailClient({
-      url: ZEPTOMAIL_URL,
-      token: process.env.ZEPTOMAIL_TOKEN
-    })
-  : null;
+const apiKey = process.env.INBOUND_API_KEY || "";
+
+if (!apiKey) {
+  console.warn("INBOUND_API_KEY not found - emails will not be sent");
+}
+
+const client = apiKey ? new Inbound({ apiKey }) : null;
 
 // Escape HTML to prevent injection attacks
 function escapeHtml(unsafe: string): string {
@@ -22,8 +21,6 @@ function escapeHtml(unsafe: string): string {
 
 export interface EmailNotificationConfig {
   recipients: string[];
-  fromEmail: string;
-  fromName: string;
   replyToEmail?: string;
 }
 
@@ -34,8 +31,6 @@ const defaultConfig: EmailNotificationConfig = {
     "hr@cellosports.co.za",
     "admin@cellosports.co.za",
   ],
-  fromEmail: "noreply@cellosports.co.za",
-  fromName: "Cello Sports Management",
 };
 
 export async function sendContactFormNotification(
@@ -43,11 +38,8 @@ export async function sendContactFormNotification(
   config: EmailNotificationConfig = defaultConfig
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    // Check if API token is configured
-    if (!zeptoMailClient || !process.env.ZEPTOMAIL_TOKEN) {
-      console.warn(
-        "ZEPTOMAIL_TOKEN not configured - email notification skipped"
-      );
+    if (!client) {
+      console.error("INBOUND_API_KEY not configured - email notification skipped");
       return {
         success: false,
         error: "Email service not configured",
@@ -182,39 +174,21 @@ export async function sendContactFormNotification(
       </html>
     `;
 
-    // Format recipients for ZeptoMail API
-    const toAddresses = config.recipients.map(email => ({
-      email_address: {
-        address: email,
-        name: "Cello Sports Management"
-      }
-    }));
-
-    // Send email using ZeptoMail
-    await zeptoMailClient.sendMail({
-      from: {
-        address: config.fromEmail,
-        name: config.fromName
-      },
-      to: toAddresses,
-      reply_to: config.replyToEmail ? [{
-        address: config.replyToEmail,
-        name: contact.name
-      }] : [{
-        address: contact.email,
-        name: contact.name
-      }],
+    await client.emails.send({
+      from: "Cledwyn from Lekker Network <cledwyn@lekker.network>",
+      to: config.recipients,
       subject: `New Contact Form: ${contact.name}`,
-      htmlbody: emailHtml,
+      html: emailHtml,
+      reply_to: config.replyToEmail ?? contact.email,
     });
 
     console.log(
-      `✓ Email notification sent successfully via ZeptoMail for contact from ${contact.name}`
+      `Email notification sent successfully via inbound.new for contact from ${contact.name}`
     );
 
     return { success: true };
   } catch (error: any) {
-    console.error("Failed to send email notification via ZeptoMail:", error);
+    console.error("Failed to send email notification via inbound.new:", error);
     return {
       success: false,
       error: error.message || "Unknown email error",
@@ -225,14 +199,14 @@ export async function sendContactFormNotification(
 // Test function to verify email configuration
 export async function testEmailConfiguration(): Promise<boolean> {
   try {
-    if (!process.env.ZEPTOMAIL_TOKEN) {
-      console.error("❌ ZEPTOMAIL_TOKEN environment variable not set");
+    if (!process.env.INBOUND_API_KEY) {
+      console.error("INBOUND_API_KEY environment variable not set");
       return false;
     }
 
-    console.log("✓ ZeptoMail API token found");
+    console.log("inbound.new API key found");
     console.log(`✓ Email notifications will be sent to: ${defaultConfig.recipients.join(", ")}`);
-    console.log(`✓ Emails will be sent from: ${defaultConfig.fromEmail} (${defaultConfig.fromName})`);
+    console.log("✓ Emails will be sent from: Cledwyn from Lekker Network <cledwyn@lekker.network>");
     
     return true;
   } catch (error) {
