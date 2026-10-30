@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 import analytics from "@/lib/analytics";
 
 export function WhatsAppButton() {
-  const phoneNumber = "27836219880"; // Cello Sports Management WhatsApp number
+  const phoneNumber = "27793898758"; // Cello Sports Management WhatsApp number
   const message = encodeURIComponent("Hi! I'm interested in learning more about Cello Sports Management services.");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 

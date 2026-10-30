@@ -208,9 +208,9 @@ export function Contact() {
                 <div>
                   <h4 className="font-semibold text-foreground mb-1">Phone</h4>
                   <p className="text-muted-foreground">
-                    Mobile: +27 71 872 6236
+                    Mobile: +27 79 389 8758
                     <br />
-                    Office: +27 31 880 3122
+                    Office: +27 87 729 7411
                   </p>
                 </div>
               </div>
