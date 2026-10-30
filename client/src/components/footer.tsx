@@ -148,6 +148,14 @@ export function Footer() {
               </li>
               <li>
                 <a
+                  href="tel:+27877297411"
+                  className="hover:text-background transition-colors"
+                >
+                  +27 87 729 7411
+                </a>
+              </li>
+              <li>
+                <a
                   href="mailto:info@cellosports.co.za"
                   className="hover:text-background transition-colors"
                 >
