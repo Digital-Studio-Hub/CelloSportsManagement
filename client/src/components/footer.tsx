@@ -140,10 +140,18 @@ export function Footer() {
               <li>Durban Central, 4031</li>
               <li className="pt-2">
                 <a
-                  href="tel:+27718726236"
+                  href="tel:+27793898758"
                   className="hover:text-background transition-colors"
                 >
-                  +27 71 872 6236
+                  +27 79 389 8758
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+27877297411"
+                  className="hover:text-background transition-colors"
+                >
+                  +27 87 729 7411
                 </a>
               </li>
               <li>

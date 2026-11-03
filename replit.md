@@ -15,7 +15,7 @@ The platform includes:
 ## Recent Changes (October 2025)
 
 ### Next-Phase Features Completed:
-1. **WhatsApp Chat Integration** - Floating button in bottom-right corner opens chat with Cello Sports Management (+27718726236)
+1. **WhatsApp Chat Integration** - Floating button in bottom-right corner opens chat with Cello Sports Management (+27793898758)
 2. **Google Analytics 4 & Meta Pixel** - Privacy-compliant tracking for form submissions, WhatsApp clicks, and conversion events
 3. **Blog Section** - Full blog with listing page, detail pages, categories (Insights, Event Recaps, Athlete Stories), and 3 seeded sample posts
 4. **Careers Page** - 4 job postings (Sports Agent, Marketing Coordinator, Event Manager, Talent Scout) with email application system
